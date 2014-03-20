@@ -60,6 +60,9 @@ public class FormRenderingComponent extends BaseUIComponent {
 
         ctx = formRenderContextManager.getFormRenderContext(ctxUID);
 
+        String opener = commandRequest.getRequestObject().getParameter("opener");
+
+        if (!StringUtils.isEmpty(opener)) ctx.addAttribute("opener", opener);
     }
 
     public void actionSubmitForm(CommandRequest request) {
@@ -98,6 +101,10 @@ public class FormRenderingComponent extends BaseUIComponent {
 
     public boolean isReadonly() {
         return ctx.isReadonly();
+    }
+
+    public String getOpener() {
+        return (String)ctx.getAttribute("opener");
     }
 
     public void setBaseComponentJSP(String baseComponentJSP) {

@@ -1,4 +1,5 @@
 <%@ page import="org.jbpm.formModeler.api.model.Form" %>
+<%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ taglib prefix="mvc" uri="mvc_taglib.tld" %>
 <%@ taglib prefix="factory" uri="factory.tld" %>
 <mvc:formatter name="FormRenderingComponentFormatter">
@@ -6,6 +7,8 @@
         <mvc:fragmentValue name="ctxUID" id="ctxUID">
         <mvc:fragmentValue name="form" id="form">
         <mvc:fragmentValue name="readonly" id="readonly">
+        <mvc:fragmentValue name="opener" id="opener">
+        <mvc:fragmentValue name="submitted" id="submitted">
 <form action="<factory:formUrl/>" method="post" id="formRendering<%=ctxUID%>" style="margin:0px; padding:0px;" enctype="multipart/form-data">
     <factory:handler action="submitForm"/>
     <input type="hidden" name="ctxUID" id="ctxUID" value="<%=ctxUID%>"/>
@@ -21,6 +24,30 @@
 </form>
 <script type="text/javascript" defer="defer">
 
+<%
+    if (!StringUtils.isEmpty((String)opener)) {
+        if(Boolean.TRUE.equals(submitted)) {
+%>
+    window.top.postMessage("submitted", window.location.href);
+<%
+        }
+%>
+    function restlistener(event){
+        if (event.origin != "<%=opener%>") return
+        if (event.data == 'submit') {
+            document.getElementById('persist_<%=ctxUID%>').value = true;
+            document.getElementById('formRendering<%=ctxUID%>').submit();
+        }
+    }
+
+    if (window.addEventListener){
+        addEventListener("message", restlistener, false)
+    } else {
+        attachEvent("onmessage", restlistener)
+    }
+<%
+    } else {
+%>
     function resizeParent() {
         var width = ($(document).width() + 20) + "px";
         var height = ($("#formRendering<%=ctxUID%>").parent().height() + 20) + "px";
@@ -31,9 +58,13 @@
     $(document).ready(function() {
         setTimeout("resizeParent()", 100);
     });
-
+<%
+    }
+%>
     setAjax("formRendering<%=ctxUID%>");
 </script>
+        </mvc:fragmentValue>
+        </mvc:fragmentValue>
         </mvc:fragmentValue>
         </mvc:fragmentValue>
         </mvc:fragmentValue>
