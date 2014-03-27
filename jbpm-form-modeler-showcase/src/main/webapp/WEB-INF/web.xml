@@ -120,7 +120,12 @@ minutes. it is now 24 hours. -->
 
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
-        <url-pattern>/org.jbpm.formModeler.jBPMFormModeler/Controller</url-pattern>
+        <url-pattern>/org.jbpm.formModeler.jBPMFormModeler/forms/Controller</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/forms/Controller</url-pattern>
     </servlet-mapping>
     <!-- end form-modeler component -->
   <!-- jBoss' default mapping is to "image/svg", which causes the client
