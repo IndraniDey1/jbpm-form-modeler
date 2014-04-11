@@ -99,7 +99,7 @@ public class FormModelerFormProvider implements FormProvider {
             formRenderContentMarshaller.addContentMarshaller(context.getUID(), (ContentMarshallerContext) renderContext.get("marshallerContext"));
 
             String status = task.getTaskData().getStatus().name();
-            boolean readonly = "Reserved".equals(status) || "Ready".equals(status);
+            boolean readonly = "Reserved".equals(status) || "Ready".equals(status) || status.equals("Completed");
             context.setReadonly(readonly);
             result = context.getUID();
 
