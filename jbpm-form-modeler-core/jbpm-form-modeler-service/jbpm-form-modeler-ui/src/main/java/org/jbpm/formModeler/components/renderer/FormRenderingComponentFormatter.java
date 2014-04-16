@@ -40,7 +40,6 @@ public class FormRenderingComponentFormatter extends Formatter {
         setAttribute("submitted", formRenderingComponent.isSubmited());
         setAttribute("readonly", formRenderingComponent.isReadonly() || (formRenderingComponent.isSubmited() && formRenderingComponent.getFieldErrors().size() == 0));
         setAttribute("form", formRenderingComponent.getForm());
-        setAttribute("opener", formRenderingComponent.getOpener());
         renderFragment("output");
     }
 

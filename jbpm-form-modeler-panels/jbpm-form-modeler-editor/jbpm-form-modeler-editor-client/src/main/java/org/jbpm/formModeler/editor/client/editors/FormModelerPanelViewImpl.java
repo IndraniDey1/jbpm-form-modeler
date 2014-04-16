@@ -80,7 +80,7 @@ public class FormModelerPanelViewImpl extends Composite
         doOnResize();
         String localeName = LocaleInfo.getCurrentLocale().getLocaleName();
         if (GWT_DEFAULT_LOCALE.equals(localeName)) localeName = FORM_MODELER_DEFAULT_LOCALE;
-        frame.setUrl(UriUtils.fromString(GWT.getModuleBaseURL() + "forms/Controller?_fb=wysiwygfe&_fp=Start&ctxUID=" + ctxUID + "&locale=" + localeName).asString());
+        frame.setUrl(UriUtils.fromString(GWT.getModuleBaseURL() + "Controller?_fb=wysiwygfe&_fp=Start&ctxUID=" + ctxUID + "&locale=" + localeName).asString());
         visible(true);
     }
 
